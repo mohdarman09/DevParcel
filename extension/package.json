@@ -1,0 +1,127 @@
+{
+  "name": "devparcel",
+  "displayName": "DevParcel",
+  "description": "Package and share your project workspace quickly and securely directly from your editor.",
+  "version": "0.1.0",
+  "publisher": "devparcel-placeholder",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "devparcel.open",
+        "title": "DevParcel: Open",
+        "category": "DevParcel"
+      },
+      {
+        "command": "devparcel.downloadZip",
+        "title": "DevParcel: Download ZIP",
+        "category": "DevParcel"
+      },
+      {
+        "command": "devparcel.shareZip",
+        "title": "DevParcel: Share ZIP",
+        "category": "DevParcel"
+      },
+      {
+        "command": "devparcel.shareDownloadLink",
+        "title": "DevParcel: Share Download Link",
+        "category": "DevParcel"
+      },
+      {
+        "command": "devparcel.openSettings",
+        "title": "DevParcel: Open Settings",
+        "category": "DevParcel"
+      },
+      {
+        "command": "devparcel.testWebShare",
+        "title": "DevParcel: Test Web Share API Capability",
+        "category": "DevParcel"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "devparcel-container",
+          "title": "DevParcel",
+          "icon": "resources/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "devparcel-container": [
+        {
+          "type": "webview",
+          "id": "devparcel.views.main",
+          "name": "DevParcel"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "DevParcel",
+      "properties": {
+        "devparcel.defaultExclusions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [
+            "node_modules/",
+            ".git/",
+            ".env",
+            ".env.*",
+            "dist/",
+            "build/",
+            ".cache/",
+            ".next/",
+            "coverage/"
+          ],
+          "description": "Default paths and patterns excluded when packaging projects."
+        },
+        "devparcel.showProjectSummary": {
+          "type": "boolean",
+          "default": true,
+          "description": "Whether to show project summary prior to completing actions."
+        },
+        "devparcel.defaultLinkExpiryHours": {
+          "type": "number",
+          "default": 24,
+          "description": "Default temporary share link expiry in hours."
+        },
+        "devparcel.backendUrl": {
+          "type": "string",
+          "default": "http://localhost:3000",
+          "description": "DevParcel backend service URL for temporary share links."
+        },
+        "devparcel.passwordProtectShares": {
+          "type": "boolean",
+          "default": false,
+          "description": "Require recipients to enter a password before downloading a protected project."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "typecheck": "tsc --noEmit",
+    "package": "vsce package --no-dependencies --allow-missing-repository",
+    "test": "npm run compile && node --test out/test/**/*.test.js"
+  },
+  "dependencies": {
+    "archiver": "^7.0.1"
+  },
+  "devDependencies": {
+    "@types/archiver": "^6.0.3",
+    "@types/node": "^18.19.0",
+    "@types/vscode": "^1.85.0",
+    "@vscode/vsce": "^4.0.0",
+    "typescript": "^5.3.3"
+  }
+}

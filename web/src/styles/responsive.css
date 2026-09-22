@@ -1,0 +1,491 @@
+/* ==========================================================================
+   DevParcel Responsive Breakpoints & Mobile Priority Stylesheet
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Desktop & Large Screens (1024px - 1440px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 1200px) {
+  .hero-section {
+    grid-template-columns: 1fr 1.15fr 1fr;
+    gap: 24px;
+  }
+
+  .hero-project-title {
+    font-size: 32px;
+  }
+
+  .promo-headline {
+    font-size: 24px;
+  }
+
+  .creator-panel-inner {
+    grid-template-columns: 1.2fr 1.1fr 0.8fr;
+    gap: 18px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Tablet & Intermediate Screens (768px - 1023px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 1023px) and (min-width: 768px) {
+  .hero-section {
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+    align-items: center;
+    width: 100%;
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  .hero-left-column {
+    display: contents;
+  }
+
+  .hero-project-header {
+    order: 1;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .hero-project-title {
+    font-size: 34px;
+    text-align: center;
+  }
+
+  .hero-project-description {
+    text-align: center;
+    font-size: 14.5px;
+  }
+
+  .hero-center-column {
+    order: 2;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .package-card {
+    max-width: 440px;
+  }
+
+  .hero-project-stats-container {
+    order: 3;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero-stats-grid {
+    max-width: 520px;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .hero-right-column {
+    order: 4;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
+  .promo-editorial-container {
+    max-width: 100%;
+    align-items: center;
+    text-align: center;
+  }
+
+  .promo-headline {
+    text-align: center;
+  }
+
+  .promo-subheadline {
+    text-align: center;
+  }
+
+  .promo-cta-box {
+    align-items: center;
+    max-width: 380px;
+  }
+
+  .trust-strip-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .creator-panel-inner {
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  .creator-signature-col {
+    grid-column: span 2;
+    text-align: center;
+    align-items: center;
+    margin-top: 8px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Mobile Handhelds (< 768px down to 320px)
+   CRITICAL REQUIREMENT: Mobile Download Priority (Zero Scroll to CTA)
+   -------------------------------------------------------------------------- */
+@media (max-width: 767px) {
+  .app-shell {
+    padding: 0;
+  }
+
+  .header-container {
+    padding: 16px 16px 12px;
+  }
+
+  .app-main {
+    padding: 8px 16px 36px;
+    gap: 36px;
+  }
+
+  /* Reorder Hero for Mobile Download Priority */
+  .hero-section {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    align-items: center;
+    width: 100%;
+  }
+
+  .hero-left-column {
+    display: contents;
+  }
+
+  /* 1. Project Title & Status (First visible content) */
+  .hero-project-header {
+    order: 1;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .hero-status-pill {
+    margin-bottom: 12px;
+  }
+
+  .hero-project-title {
+    font-size: 27px;
+    text-align: center;
+    line-height: 1.2;
+    margin-bottom: 4px;
+  }
+
+  .hero-project-tag {
+    font-size: 10px;
+    margin-bottom: 8px;
+  }
+
+  .hero-project-description {
+    font-size: 13px;
+    text-align: center;
+    margin-bottom: 4px;
+  }
+
+  /* 2. Primary Download Card (Immediately accessible on Mobile without scrolling!) */
+  .hero-center-column {
+    order: 2;
+    width: 100%;
+  }
+
+  .package-card {
+    max-width: 100%;
+    padding: 24px 16px 20px;
+    border-radius: var(--radius-xl);
+  }
+
+  .package-visual-stage {
+    width: 160px;
+    height: 140px;
+    margin-bottom: 14px;
+  }
+
+  .aura-glow {
+    width: 120px;
+    height: 120px;
+  }
+
+  .folder-svg {
+    width: 110px;
+    height: 110px;
+  }
+
+  .download-btn {
+    width: 100%;
+    max-width: 100%;
+    height: 50px;
+    font-size: 15px;
+  }
+
+  .security-guarantee-pill {
+    font-size: 11px;
+    padding: 5px 10px;
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* 3. Dynamic Stats Grid (Directly below Download action) */
+  .hero-project-stats-container {
+    order: 3;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero-stats-grid {
+    width: 100%;
+    max-width: 100%;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .stat-card {
+    padding: 8px 10px;
+    gap: 8px;
+    border-radius: var(--radius-md);
+  }
+
+  .stat-icon-wrapper {
+    width: 32px;
+    height: 32px;
+  }
+
+  .stat-label {
+    font-size: 10px;
+  }
+
+  .stat-value {
+    font-size: 13px;
+  }
+
+  .sensitive-notice {
+    max-width: 100%;
+    font-size: 11px;
+    padding: 8px 10px;
+  }
+
+  /* 4. DevParcel Extension Promotion (Secondary) */
+  .hero-right-column {
+    order: 4;
+    width: 100%;
+  }
+
+  .promo-editorial-container {
+    max-width: 100%;
+    align-items: center;
+    text-align: center;
+  }
+
+  .promo-headline {
+    font-size: 22px;
+    text-align: center;
+    line-height: 1.25;
+  }
+
+  .promo-subheadline {
+    font-size: 13px;
+    text-align: center;
+    margin-bottom: 16px;
+  }
+
+  .promo-feature-list {
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+
+  .promo-feature-row {
+    font-size: 12.5px;
+    justify-content: flex-start;
+    text-align: left;
+  }
+
+  .promo-cta-box {
+    width: 100%;
+  }
+
+  .vscode-cta-btn,
+  .vscode-cta-pending {
+    width: 100%;
+    height: 46px;
+    font-size: 13px;
+  }
+
+  /* 4-Column Trust Strip on Mobile -> 2x2 Grid */
+  .trust-strip-section {
+    padding-top: 24px;
+  }
+
+  .trust-strip-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .trust-strip-card {
+    padding: 10px 6px;
+  }
+
+  .trust-icon-circle {
+    width: 36px;
+    height: 36px;
+    margin-bottom: 8px;
+  }
+
+  .trust-card-title {
+    font-size: 13.5px;
+  }
+
+  .trust-card-desc {
+    font-size: 11px;
+  }
+
+  /* Quote on Mobile */
+  .quote-section {
+    padding: 24px 12px;
+  }
+
+  .quote-bg-badge {
+    display: none;
+  }
+
+  .quote-text {
+    font-size: 18px;
+  }
+
+  /* Creator Panel on Mobile */
+  .creator-panel {
+    padding: 20px 16px;
+    border-radius: var(--radius-xl);
+  }
+
+  .creator-panel-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    text-align: center;
+    align-items: center;
+  }
+
+  .creator-identity-col {
+    flex-direction: column;
+    text-align: center;
+    gap: 12px;
+  }
+
+  .creator-avatar-badge {
+    width: 48px;
+    height: 48px;
+    font-size: 16px;
+  }
+
+  .creator-actions-col {
+    width: 100%;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .creator-pill-btn,
+  .creator-pill-disabled {
+    width: 100%;
+    justify-content: center;
+    padding: 10px 16px;
+  }
+
+  .creator-signature-col {
+    text-align: center;
+    align-items: center;
+  }
+
+  .signature-quote {
+    font-size: 14.5px;
+  }
+
+  /* Footer on Mobile */
+  .app-footer {
+    padding: 20px 16px;
+  }
+
+  .footer-container {
+    flex-direction: column;
+    gap: 14px;
+    text-align: center;
+  }
+
+  .footer-left {
+    justify-content: center;
+  }
+
+  .footer-right {
+    align-items: center;
+  }
+
+  /* Mobile Skeleton */
+  .hero-skeleton-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Extra Small Mobile Screens (320px - 360px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 360px) {
+  .header-trust-pill {
+    padding: 4px 8px;
+    font-size: 10.5px;
+  }
+
+  .trust-pill-text {
+    font-size: 10.5px;
+  }
+
+  .hero-project-title {
+    font-size: 23px;
+  }
+
+  .hero-stats-grid {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+
+  .trust-strip-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Accessibility: Reduced Motion Preference
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .floating-dot {
+    animation: none !important;
+  }
+
+  .spinner {
+    animation: none !important;
+  }
+}

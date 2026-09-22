@@ -1,0 +1,65 @@
+@import './tokens.css';
+@import './components.css';
+@import './responsive.css';
+
+/* CSS Reset & Modern Box Model */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: var(--font-sans);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  background-color: var(--bg-app);
+  color: var(--text-primary);
+  min-height: 100%;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: 
+    radial-gradient(ellipse at 50% -10%, rgba(224, 231, 255, 0.6) 0%, rgba(248, 250, 252, 0) 55%),
+    radial-gradient(ellipse at 85% 20%, rgba(238, 242, 255, 0.4) 0%, rgba(248, 250, 252, 0) 40%),
+    var(--bg-app);
+  background-attachment: fixed;
+  overflow-x: hidden;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* Accessibility Focus States */
+:focus-visible {
+  outline: 2px solid var(--accent-focus-ring);
+  outline-offset: 3px;
+}
+
+button, a {
+  -webkit-tap-highlight-color: transparent;
+  font-family: inherit;
+}
+
+/* Reduced Motion Preference */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

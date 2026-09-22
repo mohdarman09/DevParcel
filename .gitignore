@@ -1,0 +1,51 @@
+# ========================
+# DevParcel Root .gitignore
+# ========================
+
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+out/
+coverage/
+
+# Environment & secrets
+.env
+.env.*
+!.env.example
+
+# Generated packages
+*.vsix
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+*.zip
+
+# OS-specific
+.DS_Store
+Thumbs.db
+Desktop.ini
+ehthumbs.db
+
+# IDE / Editor metadata
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Testing artifacts
+.vscode-test/
+
+# Scratch / temporary development files
+scratch/
+tmp/
+temp/
+
+# Documentation
+docs/

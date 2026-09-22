@@ -1,0 +1,131 @@
+:root {
+  /* Color Palette - Refined Neutral & Subtle Ambient Lavender/Blue Glow */
+  --bg-app: #f8fafc;
+  --bg-surface: #ffffff;
+  --bg-card: #ffffff;
+  --bg-subtle: #f1f5f9;
+  --bg-inset: #eef2f7;
+  
+  /* Ambient Glow Layers */
+  --glow-lavender: rgba(139, 92, 246, 0.08);
+  --glow-blue: rgba(59, 130, 246, 0.09);
+  --glow-cyan: rgba(6, 182, 212, 0.06);
+
+  /* Text & Contrast Hierarchy (WCAG AAA/AA Compliant) */
+  --text-primary: #0f172a;     /* Slate 900: High contrast headings & values */
+  --text-secondary: #334155;   /* Slate 700: Body text and descriptions */
+  --text-muted: #64748b;       /* Slate 500: Auxiliary labels and hints */
+  --text-subtle: #94a3b8;      /* Slate 400 */
+  --text-on-dark: #ffffff;
+  
+  /* Brand & Accent (DevParcel Luxury Blue & Indigo) */
+  --accent-primary: #0f172a;   /* Primary solid download button */
+  --accent-hover: #1e293b;
+  --accent-active: #020617;
+  --accent-brand: #2563eb;     /* Vibrant Royal Blue */
+  --accent-brand-hover: #1d4ed8;
+  --accent-brand-light: #eff6ff;
+  --accent-focus-ring: #3b82f6;
+
+  /* VS Code Button Colors */
+  --vscode-blue: #0078d4;
+  --vscode-blue-hover: #0066b8;
+  
+  /* Status Colors */
+  --status-success-text: #065f46;
+  --status-success-bg: #ecfdf5;
+  --status-success-border: #a7f3d0;
+  
+  --status-warning-text: #92400e;
+  --status-warning-bg: #fffbeb;
+  --status-warning-border: #fde68a;
+
+  --status-error-text: #991b1b;
+  --status-error-bg: #fef2f2;
+  --status-error-border: #fecaca;
+
+  /* Stat Tile Specific Color Sets */
+  --tile-purple-bg: #f5f3ff;
+  --tile-purple-icon: #9333ea;
+  --tile-cyan-bg: #e0f2fe;
+  --tile-cyan-icon: #0284c7;
+  --tile-blue-bg: #eff6ff;
+  --tile-blue-icon: #2563eb;
+  --tile-rose-bg: #fff1f2;
+  --tile-rose-icon: #e11d48;
+  --tile-sky-bg: #e0f2fe;
+  --tile-sky-icon: #0284c7;
+  --tile-emerald-bg: #ecfdf5;
+  --tile-emerald-icon: #10b981;
+
+  /* Feature Bullet Color Sets */
+  --bullet-amber-bg: #fef3c7;
+  --bullet-amber-icon: #d97706;
+  --bullet-teal-bg: #ccfbf1;
+  --bullet-teal-icon: #0d9488;
+  --bullet-indigo-bg: #e0e7ff;
+  --bullet-indigo-icon: #4f46e5;
+  --bullet-emerald-bg: #d1fae5;
+  --bullet-emerald-icon: #059669;
+
+  /* Borders */
+  --border-subtle: rgba(15, 23, 42, 0.07);
+  --border-light: rgba(15, 23, 42, 0.1);
+  --border-card-highlight: rgba(255, 255, 255, 0.95);
+  --border-glow: rgba(59, 130, 246, 0.18);
+
+  /* Shadows - Refined Soft Neumorphic & Depth */
+  --shadow-neumorphic-elevated: 
+    14px 14px 32px rgba(166, 178, 201, 0.24),
+    -14px -14px 32px rgba(255, 255, 255, 0.95);
+  
+  --shadow-neumorphic-inset:
+    inset 2px 2px 6px rgba(166, 178, 201, 0.22),
+    inset -2px -2px 6px rgba(255, 255, 255, 0.95);
+
+  --shadow-card:
+    0 16px 36px -12px rgba(15, 23, 42, 0.06),
+    0 1px 3px 0 rgba(15, 23, 42, 0.02),
+    0 0 0 1px rgba(15, 23, 42, 0.05);
+
+  --shadow-center-card:
+    0 24px 60px -12px rgba(37, 99, 235, 0.14),
+    0 12px 28px -8px rgba(15, 23, 42, 0.06),
+    0 0 0 1px rgba(255, 255, 255, 0.9);
+
+  --shadow-card-hover:
+    0 24px 48px -12px rgba(15, 23, 42, 0.1),
+    0 0 0 1px rgba(15, 23, 42, 0.08);
+
+  --shadow-tile:
+    0 2px 6px rgba(15, 23, 42, 0.03),
+    0 0 0 1px rgba(15, 23, 42, 0.04);
+
+  --shadow-btn: 
+    0 4px 14px rgba(15, 23, 42, 0.2),
+    0 1px 2px rgba(15, 23, 42, 0.08);
+
+  --shadow-btn-hover: 
+    0 8px 22px rgba(15, 23, 42, 0.28),
+    0 2px 4px rgba(15, 23, 42, 0.12);
+
+  --shadow-btn-active:
+    inset 0 2px 4px rgba(0, 0, 0, 0.25);
+
+  /* Radii */
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+  --radius-2xl: 32px;
+  --radius-pill: 9999px;
+
+  /* Typography */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+
+  /* Transitions */
+  --transition-fast: 150ms cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-smooth: 240ms cubic-bezier(0.16, 1, 0.3, 1);
+}
