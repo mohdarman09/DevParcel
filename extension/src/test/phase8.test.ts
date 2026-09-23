@@ -33,6 +33,9 @@ const mockVscode: any = {
     onDidChangeWorkspaceFolders: () => ({ dispose: () => {} }),
     getConfiguration: () => ({
       get: (key: string, defaultVal: any) => {
+        if (key === 'devparcel.backendEnvironment' || key === 'backendEnvironment') {
+          return mockVscode.configBackendEnvironment ?? defaultVal;
+        }
         if (key === 'devparcel.passwordProtectShares' || key === 'passwordProtectShares') {
           return mockVscode.configPasswordProtect ?? defaultVal;
         }
@@ -73,6 +76,7 @@ const mockVscode: any = {
   errorMessages: [] as Array<{ msg: string; items: any[] }>,
   clipboardText: '',
   openedExternal: null as any,
+  configBackendEnvironment: undefined as 'Production' | 'Local' | undefined,
   configPasswordProtect: undefined as boolean | undefined,
   configExpiryHours: undefined as number | undefined,
   configExclusions: undefined as string[] | undefined,

@@ -256,6 +256,9 @@ describe('Phase 7: Share Download Link Confirmation Flow & UI Polish', () => {
       onDidChangeWorkspaceFolders: () => ({ dispose: () => {} }),
       getConfiguration: () => ({
         get: (key: string, defaultVal: any) => {
+          if (key === 'devparcel.backendEnvironment' || key === 'backendEnvironment') {
+            return mockVscode.configBackendEnvironment ?? defaultVal;
+          }
           if (key === 'devparcel.defaultLinkExpiryHours' || key === 'defaultLinkExpiryHours') {
             return mockVscode.configExpiryHours ?? defaultVal;
           }
@@ -293,6 +296,7 @@ describe('Phase 7: Share Download Link Confirmation Flow & UI Polish', () => {
     errorMessages: [] as Array<{ msg: string; items: any[] }>,
     clipboardText: '',
     openedExternal: null as any,
+    configBackendEnvironment: undefined as 'Production' | 'Local' | undefined,
     configExpiryHours: undefined as number | undefined,
     configExclusions: undefined as string[] | undefined,
     configBackendUrl: undefined as string | undefined,
@@ -311,6 +315,7 @@ describe('Phase 7: Share Download Link Confirmation Flow & UI Polish', () => {
     resetShareOperationLock
   } = require('../commands/shareDownloadLinkCommand');
   const { DevParcelViewProvider } = require('../ui/devparcelViewProvider');
+  const { DevParcelConfig } = require('../config');
 
   function createTestWorkspace(prefix: string): string {
     const dir = fs.mkdtempSync(path.join(os.tmpdir(), `devparcel-test-${prefix}-`));
@@ -906,6 +911,80 @@ describe('Phase 7: Share Download Link Confirmation Flow & UI Polish', () => {
         fs.unlinkSync(testFile);
       }
     }
+  });
+
+  test('TEST 26: DevParcelConfig backendEnvironment defaults to Production', () => {
+    mockVscode.configBackendEnvironment = undefined;
+    mockVscode.configBackendUrl = undefined;
+    assert.equal(DevParcelConfig.getBackendEnvironment(), 'Production', 'Default environment must be Production');
+    assert.equal(
+      DevParcelConfig.getBackendUrl(),
+      'https://devparcel.onrender.com',
+      'Default backend URL must resolve to production https://devparcel.onrender.com'
+    );
+  });
+
+  test('TEST 27: DevParcelConfig resolves to http://localhost:3000 when Local environment is selected', () => {
+    mockVscode.configBackendEnvironment = 'Local';
+    mockVscode.configBackendUrl = undefined;
+    assert.equal(DevParcelConfig.getBackendEnvironment(), 'Local', 'Environment should report Local');
+    assert.equal(
+      DevParcelConfig.getBackendUrl(),
+      'http://localhost:3000',
+      'Local environment must resolve to http://localhost:3000'
+    );
+    mockVscode.configBackendEnvironment = undefined;
+  });
+
+  test('TEST 28: DevParcelConfig resolves to https://devparcel.onrender.com when Production environment is selected', () => {
+    mockVscode.configBackendEnvironment = 'Production';
+    mockVscode.configBackendUrl = undefined;
+    assert.equal(DevParcelConfig.getBackendEnvironment(), 'Production', 'Environment should report Production');
+    assert.equal(
+      DevParcelConfig.getBackendUrl(),
+      'https://devparcel.onrender.com',
+      'Production environment must resolve to https://devparcel.onrender.com'
+    );
+    mockVscode.configBackendEnvironment = undefined;
+  });
+
+  test('TEST 29: Custom backendUrl override takes precedence regardless of environment', () => {
+    mockVscode.configBackendEnvironment = 'Local';
+    mockVscode.configBackendUrl = 'http://127.0.0.1:8080';
+    assert.equal(DevParcelConfig.getBackendUrl(), 'http://127.0.0.1:8080', 'Custom URL override must take effect for Local');
+
+    mockVscode.configBackendEnvironment = 'Production';
+    mockVscode.configBackendUrl = 'https://custom-staging.example.com';
+    assert.equal(
+      DevParcelConfig.getBackendUrl(),
+      'https://custom-staging.example.com',
+      'Custom URL override must take effect for Production'
+    );
+
+    mockVscode.configBackendEnvironment = undefined;
+    mockVscode.configBackendUrl = undefined;
+  });
+
+  test('TEST 30: API requests use the selected environment backend URL', async () => {
+    // 1. Verify Local environment URL construction
+    mockVscode.configBackendEnvironment = 'Local';
+    mockVscode.configBackendUrl = undefined;
+    const localUrl = DevParcelConfig.getBackendUrl();
+    assert.equal(localUrl, 'http://localhost:3000');
+    assert.equal(`${localUrl}/api/v1/shares`, 'http://localhost:3000/api/v1/shares');
+    assert.equal(`${localUrl}/api/v1/shares/history`, 'http://localhost:3000/api/v1/shares/history');
+    assert.equal(`${localUrl}/api/v1/shares/tok123/revoke`, 'http://localhost:3000/api/v1/shares/tok123/revoke');
+
+    // 2. Verify Production environment URL construction
+    mockVscode.configBackendEnvironment = 'Production';
+    mockVscode.configBackendUrl = undefined;
+    const prodUrl = DevParcelConfig.getBackendUrl();
+    assert.equal(prodUrl, 'https://devparcel.onrender.com');
+    assert.equal(`${prodUrl}/api/v1/shares`, 'https://devparcel.onrender.com/api/v1/shares');
+    assert.equal(`${prodUrl}/api/v1/shares/history`, 'https://devparcel.onrender.com/api/v1/shares/history');
+    assert.equal(`${prodUrl}/api/v1/shares/tok123/revoke`, 'https://devparcel.onrender.com/api/v1/shares/tok123/revoke');
+
+    mockVscode.configBackendEnvironment = undefined;
   });
 });
 

@@ -93,10 +93,19 @@
           "default": 24,
           "description": "Default temporary share link expiry in hours."
         },
+        "devparcel.backendEnvironment": {
+          "type": "string",
+          "enum": [
+            "Production",
+            "Local"
+          ],
+          "default": "Production",
+          "description": "DevParcel backend environment. Select 'Production' (default: https://devparcel.onrender.com) for cloud sharing or 'Local' (http://localhost:3000) for local development."
+        },
         "devparcel.backendUrl": {
           "type": "string",
-          "default": "http://localhost:3000",
-          "description": "DevParcel backend service URL for temporary share links."
+          "default": "",
+          "description": "Optional custom backend service URL override. When omitted, the URL is automatically resolved based on the selected backendEnvironment (Production: https://devparcel.onrender.com, Local: http://localhost:3000)."
         },
         "devparcel.passwordProtectShares": {
           "type": "boolean",
