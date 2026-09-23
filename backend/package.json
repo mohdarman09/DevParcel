@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "description": "DevParcel backend service for secure temporary project sharing",
   "main": "dist/server.js",
+  "engines": {
+    "node": ">=20.0.0 <21.0.0"
+  },
   "scripts": {
     "build": "tsc",
     "start": "node dist/server.js",
