@@ -7,3 +7,10 @@ out/test/**
 tsconfig.json
 **/*.map
 **/*.tsbuildinfo
+*.vsix
+scripts/**
+node_modules/**/test/**
+node_modules/**/tests/**
+node_modules/**/.github/**
+node_modules/**/.git*
+node_modules/**/*.d.ts

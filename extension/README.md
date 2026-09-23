@@ -2,7 +2,18 @@
 
 **DevParcel** is a developer-focused VS Code extension for packaging, securing, and temporarily sharing project workspaces directly from your editor.
 
+Created by **Mohd Arman**
+
 Package your active workspace into a clean ZIP archive, share it natively via your OS, or generate temporary, self-expiring download links with optional password protection — without leaving your code editor.
+
+---
+
+## Creator & Community
+
+- **Creator**: Mohd Arman
+- **GitHub Repository**: [https://github.com/mohdarman09/DevParcel](https://github.com/mohdarman09/DevParcel)
+- **LinkedIn**: [https://www.linkedin.com/in/mohd-arman-6417a7320/](https://www.linkedin.com/in/mohd-arman-6417a7320/)
+- **Portfolio**: [https://mohd-arman-portfolio.vercel.app/](https://mohd-arman-portfolio.vercel.app/)
 
 ---
 

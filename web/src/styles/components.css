@@ -22,6 +22,9 @@
   border-radius: 50%;
   filter: blur(80px);
   z-index: 0;
+  will-change: transform;
+  transform: translateZ(0);
+  contain: strict;
 }
 
 .ambient-glow--top-left {
@@ -96,6 +99,7 @@
   letter-spacing: -0.025em;
   color: var(--text-primary);
   line-height: 1.15;
+  white-space: nowrap;
 }
 
 .brand-subtitle {
@@ -182,6 +186,7 @@
   color: var(--text-primary);
   margin: 0 0 6px;
   word-break: break-word;
+  overflow-wrap: anywhere;
 }
 
 .hero-project-tag {
@@ -1141,6 +1146,7 @@
   font-weight: 750;
   color: var(--text-primary);
   line-height: 1.15;
+  white-space: nowrap;
 }
 
 .footer-brand-tagline {

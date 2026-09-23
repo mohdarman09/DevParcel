@@ -3,6 +3,10 @@
   "displayName": "DevParcel",
   "description": "Package and share your project workspace quickly and securely directly from your editor.",
   "version": "0.1.0",
+  "icon": "resources/icon.png",
+  "author": {
+    "name": "Mohd Arman"
+  },
   "publisher": "devparcel-placeholder",
   "license": "SEE LICENSE IN LICENSE",
   "repository": {
@@ -120,11 +124,13 @@
     }
   },
   "scripts": {
-    "vscode:prepublish": "npm run compile",
+    "clean": "node -e \"const fs=require('fs'); fs.rmSync('out', {recursive:true, force:true}); fs.readdirSync('.').filter(f=>f.endsWith('.vsix')).forEach(f=>fs.unlinkSync(f));\"",
+    "vscode:prepublish": "npm run clean && npm run compile",
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
     "typecheck": "tsc --noEmit",
-    "package": "vsce package --no-dependencies --allow-missing-repository",
+    "package": "vsce package --allow-missing-repository",
+    "verify:vsix": "node scripts/verifyPackaging.js",
     "test": "npm run compile && node --test out/test/**/*.test.js"
   },
   "dependencies": {
