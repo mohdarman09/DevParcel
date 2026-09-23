@@ -48,7 +48,8 @@ export class S3StorageProvider implements ICloudStorageProvider {
     stream: NodeJS.ReadableStream,
     options?: UploadOptions
   ): Promise<UploadResult> {
-    console.log(`[Storage] Starting upload to key: ${key}`);
+    const safeKey = key && key.length > 8 ? `${key.substring(0, 8)}...` : '***';
+    console.log(`[Storage] Starting upload to key: ${safeKey}`);
     const upload = new Upload({
       client: this.client,
       params: {
@@ -79,7 +80,7 @@ export class S3StorageProvider implements ICloudStorageProvider {
 
     try {
       await Promise.race([upload.done(), timeoutPromise]);
-      console.log(`[Storage] Upload completed for key: ${key}`);
+      console.log(`[Storage] Upload completed for key: ${safeKey}`);
       return { key };
     } finally {
       if (timeoutHandle) {
@@ -100,7 +101,8 @@ export class S3StorageProvider implements ICloudStorageProvider {
     });
 
     const url = await getSignedUrl(this.client, command, { expiresIn: expiresInSeconds });
-    console.log(`[Storage] Signed URL generated for key: ${key}`);
+    const safeKey = key && key.length > 8 ? `${key.substring(0, 8)}...` : '***';
+    console.log(`[Storage] Signed URL generated for key: ${safeKey}`);
     return url;
   }
 

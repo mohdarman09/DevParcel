@@ -20,8 +20,31 @@ function readEnv(key: string): string | undefined {
   return undefined;
 }
 
+function resolveApiBaseUrl(): string {
+  const envUrl = readEnv('VITE_API_BASE_URL');
+  if (envUrl && envUrl.trim() !== '') {
+    return envUrl.trim().replace(/\/+$/, '');
+  }
+
+  // Runtime browser check: non-localhost hosts (such as dev-parcel.vercel.app) use production backend
+  if (typeof window !== 'undefined' && window.location) {
+    const host = window.location.hostname;
+    if (host !== 'localhost' && host !== '127.0.0.1') {
+      return 'https://devparcel.onrender.com';
+    }
+  }
+
+  // Build-time production mode check
+  if (typeof import.meta !== 'undefined' && (import.meta as any)?.env?.PROD) {
+    return 'https://devparcel.onrender.com';
+  }
+
+  // Local development fallback
+  return 'http://localhost:3000';
+}
+
 export const siteConfig: SiteConfig = {
-  apiBaseUrl: (readEnv('VITE_API_BASE_URL') || 'http://localhost:3000').replace(/\/+$/, ''),
+  apiBaseUrl: resolveApiBaseUrl(),
   marketplaceUrl: readEnv('VITE_DEVPARCEL_MARKETPLACE_URL')?.trim() || null,
   creator: {
     name: readEnv('VITE_CREATOR_NAME')?.trim() || 'Mohd Arman',
@@ -33,6 +56,8 @@ export const siteConfig: SiteConfig = {
     portfolioUrl:
       readEnv('VITE_CREATOR_PORTFOLIO')?.trim() ||
       'https://mohd-arman-portfolio.vercel.app/',
-    githubUrl: readEnv('VITE_CREATOR_GITHUB')?.trim() || null,
+    githubUrl:
+      readEnv('VITE_CREATOR_GITHUB')?.trim() ||
+      'https://github.com/mohdarman09/DevParcel',
   },
 };

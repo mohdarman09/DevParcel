@@ -63,27 +63,16 @@ export const PasswordProtectedView: React.FC<PasswordProtectedViewProps> = ({
       >
         <div style={{ position: 'relative', marginBottom: '12px' }}>
           <input
+            id="share-password-input"
             type={showPassword ? 'text' : 'password'}
-            className="password-input-field"
+            className={`password-input-field ${errorMessage ? 'password-input-field--error' : ''}`}
             placeholder="Enter password"
+            aria-label="Project password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             disabled={isVerifying}
             autoFocus
             required
-            style={{
-              width: '100%',
-              padding: '12px 42px 12px 14px',
-              borderRadius: '10px',
-              border: errorMessage
-                ? '1px solid #ef4444'
-                : '1px solid rgba(255, 255, 255, 0.15)',
-              background: 'rgba(255, 255, 255, 0.05)',
-              color: '#ffffff',
-              fontSize: '14px',
-              outline: 'none',
-              boxSizing: 'border-box',
-            }}
           />
           <button
             type="button"
@@ -95,12 +84,16 @@ export const PasswordProtectedView: React.FC<PasswordProtectedViewProps> = ({
               transform: 'translateY(-50%)',
               background: 'transparent',
               border: 'none',
-              color: 'rgba(255, 255, 255, 0.6)',
+              color: 'var(--text-muted, #64748b)',
               cursor: 'pointer',
-              fontSize: '12px',
+              fontSize: '14px',
               padding: '4px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
             }}
             title={showPassword ? 'Hide password' : 'Show password'}
+            aria-label={showPassword ? 'Hide password' : 'Show password'}
           >
             {showPassword ? '🙈' : '👁️'}
           </button>

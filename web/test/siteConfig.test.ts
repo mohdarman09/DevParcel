@@ -23,8 +23,11 @@ describe('siteConfig', () => {
     assert.ok(siteConfig.creator.portfolioUrl.includes('mohd-arman-portfolio.vercel.app'));
   });
 
-  it('keeps githubUrl null when unconfigured to prevent fake links', () => {
-    // Until a real repository is created, githubUrl should be null
-    assert.strictEqual(siteConfig.creator.githubUrl, null);
+  it('provides real GitHub repository URL for DevParcel', () => {
+    assert.ok(siteConfig.creator.githubUrl);
+    assert.strictEqual(
+      siteConfig.creator.githubUrl,
+      'https://github.com/mohdarman09/DevParcel'
+    );
   });
 });

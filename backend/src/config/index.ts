@@ -66,6 +66,14 @@ export const config: AppConfig = {
     maxSizeMb,
     maxSizeBytes: maxSizeMb * 1024 * 1024,
   },
-  clientUrl: process.env.CLIENT_URL || 'http://localhost:5173',
-  publicShareBaseUrl: process.env.PUBLIC_SHARE_BASE_URL || 'http://localhost:5173',
+  clientUrl:
+    process.env.CLIENT_URL ||
+    (process.env.NODE_ENV === 'production'
+      ? 'https://dev-parcel.vercel.app'
+      : 'http://localhost:5173'),
+  publicShareBaseUrl:
+    process.env.PUBLIC_SHARE_BASE_URL ||
+    (process.env.NODE_ENV === 'production'
+      ? 'https://dev-parcel.vercel.app'
+      : 'http://localhost:5173'),
 };

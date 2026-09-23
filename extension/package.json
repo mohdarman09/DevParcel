@@ -4,6 +4,24 @@
   "description": "Package and share your project workspace quickly and securely directly from your editor.",
   "version": "0.1.0",
   "publisher": "devparcel-placeholder",
+  "license": "SEE LICENSE IN LICENSE",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mohdarman09/DevParcel.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mohdarman09/DevParcel/issues"
+  },
+  "homepage": "https://github.com/mohdarman09/DevParcel#readme",
+  "keywords": [
+    "share",
+    "zip",
+    "developer",
+    "workspace",
+    "collaboration",
+    "archive",
+    "packaging"
+  ],
   "engines": {
     "vscode": "^1.85.0"
   },

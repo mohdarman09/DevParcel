@@ -13,8 +13,16 @@ export function createApp(): Express {
   const app = express();
   const isProduction = config.nodeEnv === 'production';
 
-  // 1. Security Headers via Helmet
-  const allowedOrigins = config.clientUrl.split(',').map((url) => url.trim());
+  // 1. Security Headers via Helmet & CORS Origins
+  const configuredOrigins = config.clientUrl.split(',').map((url) => url.trim().replace(/\/+$/, ''));
+  const allowedOrigins = Array.from(
+    new Set([
+      'https://dev-parcel.vercel.app',
+      'http://localhost:5173',
+      'http://localhost:3000',
+      ...configuredOrigins,
+    ])
+  ).filter(Boolean);
 
   app.use(
     helmet({
@@ -47,7 +55,8 @@ export function createApp(): Express {
       origin: (origin, callback) => {
         // Allow requests with no origin (mobile apps, curl, VS Code extension host)
         if (!origin) return callback(null, true);
-        if (allowedOrigins.indexOf(origin) !== -1 || config.nodeEnv === 'development') {
+        const normalizedOrigin = origin.trim().replace(/\/+$/, '');
+        if (allowedOrigins.indexOf(normalizedOrigin) !== -1 || config.nodeEnv === 'development') {
           return callback(null, true);
         }
         return callback(new Error('CORS origin denied'));

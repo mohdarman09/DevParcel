@@ -53,7 +53,8 @@ export class CleanupService {
           token: share.token,
           error: err.message || String(err),
         });
-        console.error(`[CleanupService] Failed to clean up share token ${share.token}:`, err);
+        const safeToken = share.token && share.token.length > 6 ? `${share.token.substring(0, 6)}...` : '***';
+        console.error(`[CleanupService] Failed to clean up share token ${safeToken}:`, err);
       }
     }
 

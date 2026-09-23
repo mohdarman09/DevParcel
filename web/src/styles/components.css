@@ -1002,6 +1002,44 @@
   border-color: #0d9488;
 }
 
+.creator-pill--github {
+  color: #24292f;
+}
+
+.creator-pill--github:hover {
+  background: #f6f8fa;
+  border-color: #24292f;
+}
+
+.password-input-field {
+  width: 100%;
+  padding: 12px 42px 12px 14px;
+  border-radius: var(--radius-md, 10px);
+  border: 1px solid var(--border-subtle, rgba(15, 23, 42, 0.15));
+  background: var(--bg-inset, #f8fafc);
+  color: var(--text-primary, #0f172a);
+  font-size: 14px;
+  outline: none;
+  box-sizing: border-box;
+  transition: all var(--transition-fast, 150ms ease);
+}
+
+.password-input-field:focus {
+  border-color: var(--accent-primary, #3b82f6);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+  background: #ffffff;
+}
+
+.password-input-field--error {
+  border-color: #ef4444;
+  background: #fef2f2;
+}
+
+.password-input-field--error:focus {
+  border-color: #ef4444;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
+}
+
 .creator-pill-disabled {
   display: inline-flex;
   align-items: center;

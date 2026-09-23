@@ -122,7 +122,7 @@ DevParcel/
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/DevParcel.git
+git clone https://github.com/mohdarman09/DevParcel.git
 cd DevParcel
 ```
 
