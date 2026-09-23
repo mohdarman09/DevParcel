@@ -1,12 +1,11 @@
 import { Router } from 'express';
 import { shareRouter } from './shareRoutes';
+import { HealthController } from '../controllers/healthController';
 
 const apiRouter = Router();
 
-// Health check endpoint
-apiRouter.get('/health', (_req, res) => {
-  res.status(200).json({ status: 'ok', service: 'devparcel-backend', timestamp: new Date().toISOString() });
-});
+// Health check endpoint (backward compatibility under /api/v1/health)
+apiRouter.get('/health', HealthController.getLiveness);
 
 // Shares resource routes
 apiRouter.use('/shares', shareRouter);

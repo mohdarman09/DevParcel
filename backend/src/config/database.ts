@@ -85,3 +85,54 @@ export async function disconnectDatabase(): Promise<void> {
     console.log('[DevParcel Backend] Disconnected from PostgreSQL pool.');
   }
 }
+
+export async function checkDatabaseHealth(timeoutMs = 2000): Promise<{ isHealthy: boolean; error?: string }> {
+  // If not configured, check environment expectation
+  if (!config.databaseUrl) {
+    if (config.nodeEnv === 'production') {
+      return { isHealthy: false, error: 'DATABASE_URL is not configured in production.' };
+    }
+    return { isHealthy: true };
+  }
+
+  // If in test mode with mock repository and pool not connected, report healthy
+  if (process.env.NODE_ENV === 'test' && !process.env.FORCE_PG_TEST && !pool) {
+    return { isHealthy: true };
+  }
+
+  try {
+    const currentPool = getPool();
+    // In mock/test situations where max is 0, treat as healthy
+    if ((currentPool as any).options?.max === 0) {
+      return { isHealthy: true };
+    }
+
+    let client: any;
+    let timer: NodeJS.Timeout;
+    const connectPromise = currentPool.connect().then((c) => {
+      client = c;
+    });
+
+    const timeoutPromise = new Promise<never>((_, reject) => {
+      timer = setTimeout(() => reject(new Error('Database health check timed out')), timeoutMs);
+    });
+
+    try {
+      await Promise.race([connectPromise, timeoutPromise]);
+      await client.query('SELECT 1');
+      return { isHealthy: true };
+    } finally {
+      clearTimeout(timer!);
+      if (client) {
+        client.release();
+      }
+    }
+  } catch (err: any) {
+    const sanitizedError = (err?.message || 'Database connection error').replace(
+      /:([^:@]+)@/,
+      ':***@'
+    );
+    return { isHealthy: false, error: sanitizedError };
+  }
+}
+

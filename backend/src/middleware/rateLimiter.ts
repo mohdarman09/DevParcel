@@ -76,3 +76,15 @@ export const metadataLookupLimiter = createRateLimiter({
   max: 100,
   message: 'Share lookup rate limit exceeded. Please wait before querying more shares.',
 });
+
+/**
+ * Dedicated rate limiter for health check monitoring endpoints (300 requests / 15 min).
+ * Allows external uptime services to monitor at high frequency (e.g. 10-15s intervals)
+ * while mitigating excessive flooding and denial-of-service attempts.
+ */
+export const healthCheckLimiter = createRateLimiter({
+  windowMs: 15 * 60 * 1000,
+  max: 300,
+  message: 'Health check rate limit exceeded. Please reduce monitoring polling frequency.',
+});
+

@@ -5,7 +5,9 @@ import { config } from './config';
 import apiRouter from './routes';
 import { errorHandler } from './middleware/errorHandler';
 import { sendError } from './utils/responseFormatter';
-import { standardApiLimiter } from './middleware/rateLimiter';
+import { standardApiLimiter, healthCheckLimiter } from './middleware/rateLimiter';
+import { healthRouter } from './routes/healthRoutes';
+import { getAppVersion } from './utils/version';
 
 export function createApp(): Express {
   const app = express();
@@ -56,21 +58,24 @@ export function createApp(): Express {
     })
   );
 
-  // 3. Rate limiting for API routes
+  // 3. Mount health monitoring endpoints (outside /api/v1 to avoid standard API rate limiter)
+  app.use('/health', healthCheckLimiter, healthRouter);
+
+  // 4. Rate limiting for API routes
   app.use('/api/v1', standardApiLimiter);
 
-  // 4. JSON body parsing for standard endpoints
+  // 5. JSON body parsing for standard endpoints
   app.use(express.json({ limit: '1mb' }));
   app.use(express.urlencoded({ extended: true, limit: '1mb' }));
 
-  // 5. Mount API routes
+  // 6. Mount API routes
   app.use('/api/v1', apiRouter);
 
-  // 6. Root route
+  // 7. Root route
   app.get('/', (_req: Request, res: Response) => {
     res.json({
       name: 'DevParcel Backend API',
-      version: '0.1.0',
+      version: getAppVersion(),
       status: 'online',
     });
   });

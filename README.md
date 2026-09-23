@@ -104,12 +104,6 @@ DevParcel/
 │   │   ├── types/          TypeScript types
 │   │   └── utils/          Utility functions
 │   └── test/               Web app test suite
-├── docs/               Project documentation
-│   ├── API_SPEC.md         API specification
-│   ├── ARCHITECTURE.md     Architecture overview
-│   ├── DATA_MODEL.md       Database schema
-│   ├── SECURITY.md         Security specification
-│   └── ...                 Additional documentation
 ├── LICENSE             Proprietary license
 ├── SECURITY.md         Security reporting policy
 └── THIRD_PARTY_NOTICES.md  Third-party dependency licenses
@@ -187,6 +181,19 @@ The web app runs on `http://localhost:5173` by default.
 1. Open the `DevParcel/` folder in VS Code.
 2. Press `F5` to launch the Extension Development Host.
 3. The DevParcel sidebar will appear in the activity bar.
+
+## Health Monitoring & Uptime
+
+The backend exposes dedicated health monitoring endpoints designed for external uptime services:
+
+- **`GET /health`** — Lightweight liveness probe. Returns HTTP 200 with dynamic uptime, service name, version, and timestamp. Does not touch the database, storage, or secrets.
+- **`GET /health/ready`** — Operational readiness probe. Returns HTTP 200 when startup configuration is valid and database is operational, or HTTP 503 if degraded.
+
+### External Monitoring Guidelines
+
+- External uptime monitoring services (e.g. UptimeRobot, BetterUptime, Pingdom) should call `GET https://<backend-domain>/health`.
+- Monitoring polling frequency is configurable externally (e.g. 15s, 30s, 60s). A dedicated rate limiter allows up to 300 requests per 15 minutes.
+- **Hosting Provider Behavior Note**: Periodic health checks allow external uptime monitoring, but whether periodic requests prevent a hosting provider from sleeping, idling, suspending, or scaling down a container depends entirely on the hosting provider's infrastructure and inactivity policies. A 15-second health check does **not** guarantee that a free-tier or serverless hosting provider will keep a service continuously running.
 
 ### Running Tests
 
