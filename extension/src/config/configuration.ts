@@ -17,6 +17,21 @@ export class DevParcelConfig {
   public static readonly MAX_UPLOAD_SIZE_BYTES = MAX_UPLOAD_SIZE_BYTES;
   public static readonly BACKEND_URLS = BACKEND_URLS;
 
+  private static _extensionMode: vscode.ExtensionMode = vscode.ExtensionMode.Production;
+  private static _testBackendUrl?: string;
+
+  public static setExtensionMode(mode: vscode.ExtensionMode): void {
+    this._extensionMode = mode;
+  }
+
+  public static getExtensionMode(): vscode.ExtensionMode {
+    return this._extensionMode;
+  }
+
+  public static setTestBackendUrl(url?: string): void {
+    this._testBackendUrl = url;
+  }
+
   public static getDefaultExclusions(): string[] {
     const config = vscode.workspace.getConfiguration(this.SECTION);
     return config.get<string[]>('defaultExclusions', [
@@ -42,20 +57,24 @@ export class DevParcelConfig {
     return config.get<number>('defaultLinkExpiryHours', 24);
   }
 
-  public static getBackendEnvironment(): BackendEnvironment {
-    const config = vscode.workspace.getConfiguration(this.SECTION);
-    const env = config.get<string>('backendEnvironment', 'Production');
-    return env === 'Local' ? 'Local' : 'Production';
-  }
-
   public static getBackendUrl(): string {
-    const config = vscode.workspace.getConfiguration(this.SECTION);
-    const customUrl = config.get<string>('backendUrl');
-    if (customUrl && customUrl.trim() !== '') {
-      return customUrl.trim().replace(/\/+$/, '');
+    // 1. In Production mode, strictly resolve to the production URL.
+    if (this._extensionMode === vscode.ExtensionMode.Production) {
+      return BACKEND_URLS.Production;
     }
-    const env = this.getBackendEnvironment();
-    return BACKEND_URLS[env];
+
+    // 2. In non-production modes, allow test URL override if set:
+    if (this._testBackendUrl && this._testBackendUrl.trim() !== '') {
+      return this._testBackendUrl.trim().replace(/\/+$/, '');
+    }
+
+    // 3. In Development mode, resolve to the local development URL.
+    if (this._extensionMode === vscode.ExtensionMode.Development) {
+      return BACKEND_URLS.Local;
+    }
+
+    // Default fallback is Production
+    return BACKEND_URLS.Production;
   }
 
   public static getPasswordProtectShares(): boolean {

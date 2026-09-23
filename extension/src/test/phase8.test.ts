@@ -74,8 +74,11 @@ const mockVscode: any = {
   infoMessages: [] as Array<{ msg: string; items: any[] }>,
   warningMessages: [] as Array<{ msg: string; items: any[] }>,
   errorMessages: [] as Array<{ msg: string; items: any[] }>,
-  clipboardText: '',
-  openedExternal: null as any,
+  ExtensionMode: {
+    Production: 1,
+    Development: 2,
+    Test: 3,
+  },
   configBackendEnvironment: undefined as 'Production' | 'Local' | undefined,
   configPasswordProtect: undefined as boolean | undefined,
   configExpiryHours: undefined as number | undefined,
