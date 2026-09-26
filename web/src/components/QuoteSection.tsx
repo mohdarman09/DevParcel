@@ -2,35 +2,18 @@ import React from 'react';
 
 export const QuoteSection: React.FC = () => {
   return (
-    <section className="quote-section" aria-label="DevParcel Brand Philosophy">
-      {/* Decorative Tilted Code Badge in background */}
-      <div className="quote-bg-badge" aria-hidden="true">
-        <div className="floating-code-tile">
-          <svg
-            width="56"
-            height="56"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <polyline points="16 18 22 12 16 6" />
-            <polyline points="8 6 2 12 8 18" />
-          </svg>
-        </div>
-      </div>
-
-      <div className="quote-container">
-        <span className="quote-mark" aria-hidden="true">
+    <section className="w-full max-w-4xl mx-auto px-4 sm:px-6 my-6 sm:my-8 text-center" aria-label="DevParcel Brand Philosophy">
+      <div className="relative p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-blue-50/70 via-indigo-50/50 to-purple-50/70 border border-blue-100 shadow-soft-sm">
+        <span className="text-4xl sm:text-5xl font-serif text-blue-300 select-none block leading-none mb-2" aria-hidden="true">
           “
         </span>
-        <blockquote className="quote-text">
+        <blockquote className="text-xl sm:text-3xl font-extrabold text-slate-800 tracking-tight leading-snug">
           Share code, not the chaos.
         </blockquote>
-        <div className="quote-rule" aria-hidden="true" />
-        <span className="quote-author">DevParcel</span>
+        <div className="w-12 h-1 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full mx-auto my-4" aria-hidden="true" />
+        <span className="text-xs sm:text-sm font-bold uppercase tracking-wider text-slate-500">
+          DevParcel
+        </span>
       </div>
     </section>
   );

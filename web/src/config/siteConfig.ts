@@ -20,31 +20,63 @@ function readEnv(key: string): string | undefined {
   return undefined;
 }
 
-function resolveApiBaseUrl(): string {
-  const envUrl = readEnv('VITE_API_BASE_URL');
-  if (envUrl && envUrl.trim() !== '') {
-    return envUrl.trim().replace(/\/+$/, '');
-  }
+export function resolveApiBaseUrl(): string {
+  const envUrl = readEnv('VITE_API_BASE_URL')?.trim();
+  const isEnvLocalhost = !envUrl || /^(https?:\/\/)?(localhost|127\.0\.0\.1)(:\d+)?/i.test(envUrl);
 
-  // Runtime browser check: non-localhost hosts (such as dev-parcel.vercel.app) use production backend
+  // Runtime browser environment check
   if (typeof window !== 'undefined' && window.location) {
-    const host = window.location.hostname;
-    if (host !== 'localhost' && host !== '127.0.0.1') {
+    const hostname = window.location.hostname;
+    const isBrowserLocalhost =
+      hostname === 'localhost' ||
+      hostname === '127.0.0.1' ||
+      hostname === '0.0.0.0' ||
+      hostname === '';
+
+    // If browser is running on production/deployed host (e.g., dev-parcel.vercel.app or any domain)
+    if (!isBrowserLocalhost) {
+      // If a non-localhost custom API URL was explicitly set, use it; otherwise use the deployed Render backend
+      if (envUrl && !isEnvLocalhost) {
+        return envUrl.replace(/\/+$/, '');
+      }
       return 'https://devparcel.onrender.com';
     }
+
+    // Browser is on localhost
+    if (envUrl && envUrl !== '') {
+      return envUrl.replace(/\/+$/, '');
+    }
+    return 'http://localhost:3000';
   }
 
-  // Build-time production mode check
-  if (typeof import.meta !== 'undefined' && (import.meta as any)?.env?.PROD) {
+  // Build-time / Node environment check
+  const isProd = Boolean(typeof import.meta !== 'undefined' && (import.meta as any)?.env?.PROD);
+  if (isProd) {
+    if (envUrl && !isEnvLocalhost) {
+      return envUrl.replace(/\/+$/, '');
+    }
     return 'https://devparcel.onrender.com';
   }
 
-  // Local development fallback
-  return 'http://localhost:3000';
+  return envUrl && envUrl !== '' ? envUrl.replace(/\/+$/, '') : 'http://localhost:3000';
+}
+
+let apiBaseUrlOverride: string | null = null;
+
+export function setApiBaseUrlOverride(url: string | null): void {
+  apiBaseUrlOverride = url;
 }
 
 export const siteConfig: SiteConfig = {
-  apiBaseUrl: resolveApiBaseUrl(),
+  get apiBaseUrl() {
+    if (apiBaseUrlOverride) {
+      return apiBaseUrlOverride.replace(/\/+$/, '');
+    }
+    return resolveApiBaseUrl();
+  },
+  set apiBaseUrl(url: string) {
+    apiBaseUrlOverride = url;
+  },
   marketplaceUrl: readEnv('VITE_DEVPARCEL_MARKETPLACE_URL')?.trim() || null,
   creator: {
     name: readEnv('VITE_CREATOR_NAME')?.trim() || 'Mohd Arman',

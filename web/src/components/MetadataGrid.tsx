@@ -45,6 +45,7 @@ export const MetadataGrid: React.FC<MetadataGridProps> = ({
           <svg
             width="16"
             height="16"
+            className="w-4 h-4 shrink-0 mt-0.5"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"

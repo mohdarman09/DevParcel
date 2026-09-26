@@ -11,7 +11,6 @@
   background-color: var(--bg-app);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   width: 100%;
 }
 
@@ -135,7 +134,6 @@
   padding: 16px 28px 48px;
   display: flex;
   flex-direction: column;
-  gap: 52px;
   position: relative;
   z-index: 10;
 }
@@ -668,11 +666,89 @@
   color: var(--bullet-emerald-icon);
 }
 
+.promo-availability-block {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.promo-availability-heading {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.promo-availability-title {
+  font-size: 13.5px;
+  font-weight: 750;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.promo-availability-desc {
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.editor-chips-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.editor-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid var(--border-subtle);
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+  font-size: 12px;
+  font-weight: 650;
+  color: var(--text-primary);
+  transition: all var(--transition-fast);
+}
+
+.editor-chip:hover {
+  transform: translateY(-1px);
+  border-color: rgba(37, 99, 235, 0.25);
+  box-shadow: 0 3px 8px rgba(15, 23, 42, 0.08);
+}
+
+.editor-chip-icon {
+  flex-shrink: 0;
+}
+
+.vscode-blue-icon {
+  color: #0078d4;
+}
+
+.antigravity-purple-icon {
+  color: #7c3aed;
+}
+
+.editor-chip-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 6px rgba(16, 185, 129, 0.5);
+}
+
 .promo-cta-box {
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  margin-top: 4px;
 }
 
 .vscode-cta-btn {
@@ -698,39 +774,8 @@
   box-shadow: 0 8px 20px rgba(0, 120, 212, 0.4);
 }
 
-.vscode-cta-pending {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  width: 100%;
-  height: 48px;
-  border-radius: var(--radius-pill);
-  background: var(--vscode-blue);
-  color: #ffffff;
-  font-size: 13.5px;
-  font-weight: 600;
-  box-shadow: 0 4px 14px rgba(0, 120, 212, 0.25);
-  cursor: default;
-}
-
 .vscode-logo-svg {
   flex-shrink: 0;
-}
-
-.marketplace-subtext {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-  font-size: 11px;
-  color: var(--text-muted);
-  margin-top: 8px;
-  width: 100%;
-}
-
-.bullet-dot {
-  font-size: 12px;
 }
 
 /* ==========================================================================
@@ -1384,3 +1429,415 @@
   background: #1e293b;
   transform: translateY(-1px);
 }
+
+/* ==========================================================================
+   Share Status Notice Card (Non-blocking status banner at top of page)
+   ========================================================================== */
+.share-status-card {
+  width: 100%;
+  max-width: 980px;
+  margin: 0 auto 28px;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(14px);
+  border-radius: var(--radius-xl);
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  box-shadow: 0 4px 20px -4px rgba(15, 23, 42, 0.07);
+  padding: 18px 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+.share-status-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(180deg, #3b82f6, #8b5cf6);
+}
+
+.share-status-card-inner {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+}
+
+.share-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  background: #f1f5f9;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  font-size: 10.5px;
+  font-weight: 750;
+  letter-spacing: 0.06em;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+
+.share-status-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex-grow: 1;
+}
+
+.share-status-title {
+  font-size: 15px;
+  font-weight: 750;
+  color: var(--text-primary);
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.share-status-desc {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.share-status-retry-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 16px;
+  border-radius: var(--radius-pill);
+  background: #0f172a;
+  color: #ffffff;
+  border: none;
+  font-size: 12px;
+  font-weight: 650;
+  cursor: pointer;
+  flex-shrink: 0;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.15);
+  transition: all var(--transition-fast);
+}
+
+.share-status-retry-btn:hover {
+  background: #1e293b;
+  transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   Promotional Fallback Layout (Invalid, Expired, Revoked Links)
+   ========================================================================== */
+.unavailable-fallback-container {
+  width: 100%;
+  max-width: 980px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+/* 1. Subtle, Intentional Status Notice Banner */
+.unavailable-status-banner {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(16px);
+  border-radius: var(--radius-xl);
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  box-shadow: var(--shadow-card);
+  padding: 24px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.unavailable-status-banner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #3b82f6, #8b5cf6, #06b6d4);
+}
+
+.unavailable-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  background: #f1f5f9;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  font-size: 11px;
+  font-weight: 750;
+  letter-spacing: 0.06em;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.status-badge-icon {
+  color: #64748b;
+}
+
+.unavailable-heading {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin: 0 0 8px;
+  letter-spacing: -0.02em;
+}
+
+.unavailable-explanation {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin: 0 0 8px;
+  max-width: 600px;
+}
+
+.unavailable-transition {
+  font-size: 13.5px;
+  color: var(--text-muted);
+  margin: 0;
+  max-width: 620px;
+}
+
+/* 2. Main Promotional Hero Card */
+.unavailable-hero-card {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border-radius: var(--radius-2xl);
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  box-shadow: var(--shadow-center-card);
+  padding: 44px 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+.unavailable-hero-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.unavailable-hero-title {
+  font-size: 36px;
+  font-weight: 850;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  color: var(--text-primary);
+  margin: 0 0 14px;
+}
+
+.unavailable-hero-desc {
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* 6-Grid Feature Points */
+.unavailable-features-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px 28px;
+  width: 100%;
+}
+
+.unavailable-feature-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 16px 18px;
+  border-radius: var(--radius-lg);
+  background: rgba(248, 250, 252, 0.7);
+  border: 1px solid rgba(15, 23, 42, 0.05);
+  transition: all var(--transition-fast);
+}
+
+.unavailable-feature-item:hover {
+  background: #ffffff;
+  border-color: rgba(37, 99, 235, 0.2);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.06);
+}
+
+.feature-text-group {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.feature-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.feature-desc {
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: var(--text-muted);
+}
+
+/* 3. Availability Panel */
+.unavailable-availability-panel {
+  width: 100%;
+  background: linear-gradient(135deg, rgba(238, 242, 255, 0.6) 0%, rgba(245, 243, 255, 0.6) 100%);
+  border: 1px solid rgba(99, 102, 241, 0.15);
+  border-radius: var(--radius-xl);
+  padding: 28px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.availability-panel-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 6px;
+}
+
+.availability-panel-title {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.availability-panel-desc {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin: 0;
+  max-width: 620px;
+}
+
+.availability-cards-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  width: 100%;
+}
+
+.availability-editor-card {
+  background: #ffffff;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: var(--radius-lg);
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.03);
+  transition: all var(--transition-fast);
+}
+
+.availability-editor-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(37, 99, 235, 0.25);
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
+}
+
+.editor-card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.editor-card-icon-box {
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.editor-icon--vscode {
+  background: #eff6ff;
+  color: #0078d4;
+  border: 1px solid rgba(0, 120, 212, 0.2);
+}
+
+.editor-icon--antigravity {
+  background: #f5f3ff;
+  color: #7c3aed;
+  border: 1px solid rgba(124, 58, 237, 0.2);
+}
+
+.editor-card-name {
+  font-size: 15px;
+  font-weight: 750;
+  color: var(--text-primary);
+  margin: 0 0 2px;
+}
+
+.editor-card-status {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #059669;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.editor-card-status::before {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #10b981;
+}
+
+.editor-card-body {
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.unavailable-actions-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  width: 100%;
+  padding-top: 4px;
+}
+
+.primary-action-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 46px;
+  padding: 0 24px;
+  border-radius: var(--radius-pill);
+  background: var(--vscode-blue);
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 650;
+  box-shadow: 0 4px 14px rgba(0, 120, 212, 0.3);
+  transition: all var(--transition-fast);
+}
+
+.primary-action-btn:hover {
+  background: var(--vscode-blue-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 120, 212, 0.4);
+}
+

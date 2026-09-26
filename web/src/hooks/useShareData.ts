@@ -24,7 +24,7 @@ export interface UseShareDataReturn {
 }
 
 export function useShareData(token: string | undefined): UseShareDataReturn {
-  const [status, setStatus] = useState<PageStatus>('loading');
+  const [status, setStatus] = useState<PageStatus>(token ? 'loading' : 'idle');
   const [share, setShare] = useState<SharePublicMetadata | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
@@ -56,8 +56,8 @@ export function useShareData(token: string | undefined): UseShareDataReturn {
     setIsVerifyingPassword(false);
 
     if (!token || token.trim().length === 0) {
-      setStatus('not_found');
-      setErrorMessage('A share token was not provided.');
+      setStatus('idle');
+      setErrorMessage(null);
       return;
     }
 
@@ -85,24 +85,60 @@ export function useShareData(token: string | undefined): UseShareDataReturn {
       setShare(null); // Guarantee no stale project data on error
 
       if (err instanceof ShareApiError) {
-        if (err.statusCode === 404) {
-          setStatus('not_found');
-        } else if (err.statusCode === 410) {
-          if (err.message.toLowerCase().includes('revoked')) {
-            setStatus('revoked');
-          } else {
-            setStatus('expired');
-          }
-        } else if (err.statusCode === 401 || err.statusCode === 403) {
+        if (
+          err.code === 'INVALID_TOKEN' ||
+          err.statusCode === 400 ||
+          err.pageStatus === 'invalid'
+        ) {
+          setStatus('invalid');
+          setErrorMessage('The share link is invalid or does not exist.');
+        } else if (
+          err.pageStatus === 'revoked' ||
+          err.code === 'SHARE_REVOKED' ||
+          err.statusCode === 401 ||
+          err.statusCode === 403 ||
+          (err.statusCode === 410 && (err.message || '').toLowerCase().includes('revoked'))
+        ) {
           setStatus('revoked');
+          setErrorMessage('This project package is no longer available.');
+        } else if (
+          err.pageStatus === 'expired' ||
+          err.code === 'SHARE_EXPIRED' ||
+          err.statusCode === 410
+        ) {
+          setStatus('expired');
+          setErrorMessage(
+            'This share link has expired. This DevParcel link is no longer available because its expiration time has passed.'
+          );
+        } else if (
+          err.pageStatus === 'not_found' ||
+          err.statusCode === 404 ||
+          err.code === 'SHARE_NOT_FOUND'
+        ) {
+          setStatus('not_found');
+          setErrorMessage(
+            'The share link may be invalid or the project may have been removed. This link does not exist or is no longer available.'
+          );
+        } else if (err.statusCode && err.statusCode >= 500) {
+          setStatus('error');
+          setErrorMessage(
+            "DevParcel couldn't retrieve this share right now. Unable to reach DevParcel right now. Please check your connection and try again."
+          );
+        } else if (err.code === 'NETWORK_ERROR' || err.statusCode === 0) {
+          setStatus('error');
+          setErrorMessage(
+            "DevParcel couldn't retrieve this share right now. Unable to reach DevParcel right now. Please check your connection and try again."
+          );
         } else {
           setStatus('error');
+          setErrorMessage(
+            "DevParcel couldn't retrieve this share right now. Unable to reach DevParcel right now. Please check your connection and try again."
+          );
         }
-        setErrorMessage(err.userFriendlyMessage);
       } else {
         setStatus('error');
         setErrorMessage(
-          'Unable to connect to DevParcel. Please check your connection and try again.'
+          "We couldn't connect to the DevParcel service right now. Please try again."
         );
       }
     }
@@ -126,11 +162,17 @@ export function useShareData(token: string | undefined): UseShareDataReturn {
     } else if (status === 'ready' && share) {
       document.title = `DevParcel — ${share.projectName}`;
     } else if (status === 'expired') {
-      document.title = 'DevParcel — Share Unavailable';
+      document.title = 'DevParcel — Share Link Expired';
     } else if (status === 'revoked') {
       document.title = 'DevParcel — Share Unavailable';
+    } else if (status === 'invalid') {
+      document.title = 'DevParcel — Invalid Share Link';
+    } else if (status === 'not_found') {
+      document.title = 'DevParcel — Link Not Found';
+    } else if (status === 'error') {
+      document.title = 'DevParcel — Connection Error';
     } else {
-      document.title = 'DevParcel — Share Unavailable';
+      document.title = 'DevParcel — Secure Project Sharing';
     }
   }, [status, share]);
 

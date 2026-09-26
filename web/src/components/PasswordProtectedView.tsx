@@ -24,14 +24,15 @@ export const PasswordProtectedView: React.FC<PasswordProtectedViewProps> = ({
 
   return (
     <article
-      className="status-card password-protected-card"
+      className="w-full max-w-md mx-auto my-10 p-6 sm:p-8 bg-white/95 backdrop-blur-md rounded-3xl border border-slate-200/90 shadow-soft-lg text-center"
       role="region"
       aria-label="Password protection prompt"
     >
-      <div className="status-icon-circle icon-protected" aria-hidden="true">
+      <div className="w-14 h-14 rounded-2xl bg-amber-50 border border-amber-200/80 text-amber-600 flex items-center justify-center mx-auto mb-4 shadow-soft-sm shrink-0" aria-hidden="true">
         <svg
           width="28"
           height="28"
+          className="w-7 h-7 shrink-0"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
@@ -44,28 +45,27 @@ export const PasswordProtectedView: React.FC<PasswordProtectedViewProps> = ({
         </svg>
       </div>
 
-      <div className="hero-status-pill" style={{ margin: '0 auto 12px' }}>
+      <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-50 border border-amber-200/80 text-amber-700 text-xs font-bold uppercase tracking-wider mb-3">
         <span>PASSWORD PROTECTED</span>
       </div>
 
-      <h1 className="status-heading">
+      <h1 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">
         {projectName ? projectName : 'Password Protected'}
       </h1>
-      <p className="status-body" style={{ maxWidth: '400px', margin: '0 auto 20px' }}>
+      <p className="mt-2 text-sm text-slate-600 max-w-xs mx-auto">
         This project is protected.
         <br />
         Enter the password to continue.
       </p>
 
-      <form
-        onSubmit={handleSubmit}
-        style={{ width: '100%', maxWidth: '340px', margin: '0 auto' }}
-      >
-        <div style={{ position: 'relative', marginBottom: '12px' }}>
+      <form onSubmit={handleSubmit} className="mt-6 w-full max-w-sm mx-auto">
+        <div className="relative mb-3">
           <input
             id="share-password-input"
             type={showPassword ? 'text' : 'password'}
-            className={`password-input-field ${errorMessage ? 'password-input-field--error' : ''}`}
+            className={`w-full h-12 pl-4 pr-11 rounded-xl border ${
+              errorMessage ? 'border-rose-400 bg-rose-50/30' : 'border-slate-300 bg-slate-50/50'
+            } text-slate-900 text-sm sm:text-base placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all`}
             placeholder="Enter password"
             aria-label="Project password"
             value={password}
@@ -77,52 +77,54 @@ export const PasswordProtectedView: React.FC<PasswordProtectedViewProps> = ({
           <button
             type="button"
             onClick={() => setShowPassword(!showPassword)}
-            style={{
-              position: 'absolute',
-              right: '10px',
-              top: '50%',
-              transform: 'translateY(-50%)',
-              background: 'transparent',
-              border: 'none',
-              color: 'var(--text-muted, #64748b)',
-              cursor: 'pointer',
-              fontSize: '14px',
-              padding: '4px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
+            className="absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-slate-600 focus:outline-none"
             title={showPassword ? 'Hide password' : 'Show password'}
             aria-label={showPassword ? 'Hide password' : 'Show password'}
           >
-            {showPassword ? '🙈' : '👁️'}
+            {showPassword ? (
+              <svg width="20" height="20" className="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24" />
+                <line x1="1" y1="1" x2="23" y2="23" />
+              </svg>
+            ) : (
+              <svg width="20" height="20" className="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                <circle cx="12" cy="3" r="3" />
+              </svg>
+            )}
           </button>
         </div>
 
         {errorMessage && (
           <div
-            style={{
-              color: '#ef4444',
-              fontSize: '13px',
-              marginBottom: '14px',
-              background: 'rgba(239, 68, 68, 0.1)',
-              border: '1px solid rgba(239, 68, 68, 0.25)',
-              padding: '8px 12px',
-              borderRadius: '8px',
-            }}
+            className="p-3 mb-3.5 rounded-xl bg-rose-50 border border-rose-200/80 text-rose-700 text-xs sm:text-sm text-left flex items-start gap-2"
             role="alert"
           >
-            {errorMessage}
+            <svg width="16" height="16" className="w-4 h-4 mt-0.5 shrink-0 text-rose-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="12" cy="12" r="10" />
+              <line x1="12" y1="8" x2="12" y2="12" />
+              <line x1="12" y1="16" x2="12.01" y2="16" />
+            </svg>
+            <span>{errorMessage}</span>
           </div>
         )}
 
         <button
           type="submit"
-          className="download-cta-btn"
           disabled={!password.trim() || isVerifying}
-          style={{ width: '100%', justifyContent: 'center', height: '46px' }}
+          className="w-full px-6 py-3 min-h-[46px] inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-semibold text-sm sm:text-base shadow-soft hover:shadow transition-all disabled:opacity-50 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 whitespace-nowrap"
         >
-          {isVerifying ? <span>Verifying...</span> : <span>Continue →</span>}
+          {isVerifying ? (
+            <>
+              <svg width="16" height="16" className="w-4 h-4 shrink-0 animate-spin text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                <circle cx="12" cy="12" r="10" stroke="currentColor" strokeOpacity="0.25" />
+                <path d="M12 2a10 10 0 0 1 10 10" stroke="currentColor" strokeLinecap="round" />
+              </svg>
+              <span>Verifying...</span>
+            </>
+          ) : (
+            <span>Continue →</span>
+          )}
         </button>
       </form>
     </article>

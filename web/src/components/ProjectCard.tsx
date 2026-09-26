@@ -28,10 +28,11 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
       </div>
 
       {/* Neumorphic package icon container */}
-      <div className="card-icon-container" aria-hidden="true">
+      <div className="card-icon-container shrink-0" aria-hidden="true">
         <svg
           width="28"
           height="28"
+          className="w-7 h-7 shrink-0"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
@@ -91,7 +92,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
       <div className="security-trust-row" aria-label="DevParcel security highlights">
         <span className="security-trust-item">
           <svg
-            className="security-check-icon"
+            className="security-check-icon w-3.5 h-3.5 shrink-0"
             width="14"
             height="14"
             viewBox="0 0 24 24"
@@ -108,7 +109,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
         </span>
         <span className="security-trust-item">
           <svg
-            className="security-check-icon"
+            className="security-check-icon w-3.5 h-3.5 shrink-0"
             width="14"
             height="14"
             viewBox="0 0 24 24"
@@ -125,7 +126,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
         </span>
         <span className="security-trust-item">
           <svg
-            className="security-check-icon"
+            className="security-check-icon w-3.5 h-3.5 shrink-0"
             width="14"
             height="14"
             viewBox="0 0 24 24"

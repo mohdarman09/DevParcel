@@ -6,45 +6,64 @@ import React from 'react';
 export const SkeletonView: React.FC = () => {
   return (
     <div
-      className="hero-skeleton-container"
-      aria-label="Loading project metadata"
+      className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6 animate-pulse"
+      aria-label="Loading share package"
       aria-busy="true"
       role="status"
     >
-      {/* Left skeleton */}
-      <div className="skeleton-col skeleton-col--left">
-        <div className="skeleton-bar skeleton-pill" />
-        <div className="skeleton-bar skeleton-title" />
-        <div className="skeleton-bar skeleton-sub" />
-        <div className="skeleton-bar skeleton-text" />
-        <div className="skeleton-stats-grid">
-          <div className="skeleton-bar skeleton-stat-tile" />
-          <div className="skeleton-bar skeleton-stat-tile" />
-          <div className="skeleton-bar skeleton-stat-tile" />
-          <div className="skeleton-bar skeleton-stat-tile" />
-          <div className="skeleton-bar skeleton-stat-tile" />
-          <div className="skeleton-bar skeleton-stat-tile" />
+      <div className="flex items-center justify-center gap-3 py-3 text-slate-700">
+        <svg
+          className="w-5 h-5 shrink-0 animate-spin text-blue-600"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2.5"
+          aria-hidden="true"
+        >
+          <circle cx="12" cy="12" r="10" stroke="currentColor" strokeOpacity="0.25" />
+          <path d="M12 2a10 10 0 0 1 10 10" stroke="currentColor" strokeLinecap="round" />
+        </svg>
+        <span className="text-base font-semibold text-slate-800">Loading share package...</span>
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 items-start">
+        {/* Left skeleton */}
+        <div className="p-6 bg-white rounded-2xl border border-slate-200/80 shadow-soft-sm flex flex-col gap-4">
+          <div className="w-28 h-6 rounded-full bg-slate-200" />
+          <div className="w-3/4 h-10 rounded-xl bg-slate-200" />
+          <div className="w-1/2 h-5 rounded-lg bg-slate-200" />
+          <div className="w-full h-12 rounded-lg bg-slate-200" />
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mt-4">
+            <div className="h-16 rounded-xl bg-slate-200" />
+            <div className="h-16 rounded-xl bg-slate-200" />
+            <div className="h-16 rounded-xl bg-slate-200" />
+            <div className="h-16 rounded-xl bg-slate-200" />
+            <div className="h-16 rounded-xl bg-slate-200" />
+            <div className="h-16 rounded-xl bg-slate-200" />
+          </div>
         </div>
-      </div>
 
-      {/* Center skeleton */}
-      <div className="skeleton-col skeleton-col--center">
-        <div className="skeleton-bar skeleton-circle-aura" />
-        <div className="skeleton-bar skeleton-btn" />
-        <div className="skeleton-bar skeleton-micro" />
-        <div className="skeleton-bar skeleton-pill-bottom" />
-      </div>
+        {/* Center skeleton */}
+        <div className="flex flex-col items-center justify-center p-7 bg-white rounded-2xl border border-slate-200/80 shadow-soft-sm">
+          <div className="w-32 h-32 rounded-2xl bg-slate-200 mb-6" />
+          <div className="w-full h-12 rounded-xl bg-slate-200 mb-3" />
+          <div className="w-40 h-4 rounded bg-slate-200" />
+        </div>
 
-      {/* Right skeleton */}
-      <div className="skeleton-col skeleton-col--right">
-        <div className="skeleton-bar skeleton-pill" />
-        <div className="skeleton-bar skeleton-headline" />
-        <div className="skeleton-bar skeleton-sub" />
-        <div className="skeleton-bar skeleton-bullet" />
-        <div className="skeleton-bar skeleton-bullet" />
-        <div className="skeleton-bar skeleton-bullet" />
-        <div className="skeleton-bar skeleton-bullet" />
-        <div className="skeleton-bar skeleton-btn-wide" />
+        {/* Right skeleton */}
+        <div className="p-6 bg-white rounded-2xl border border-slate-200/80 shadow-soft-sm flex flex-col gap-4">
+          <div className="w-24 h-5 rounded-full bg-slate-200" />
+          <div className="w-48 h-8 rounded-xl bg-slate-200" />
+          <div className="w-full h-16 rounded-lg bg-slate-200" />
+          <div className="space-y-2 mt-2">
+            <div className="w-full h-5 rounded bg-slate-200" />
+            <div className="w-full h-5 rounded bg-slate-200" />
+            <div className="w-full h-5 rounded bg-slate-200" />
+          </div>
+          <div className="w-full h-10 rounded-xl bg-slate-200 mt-auto" />
+        </div>
       </div>
     </div>
   );
@@ -55,11 +74,12 @@ export const SkeletonView: React.FC = () => {
  */
 export const ExpiredView: React.FC<{ message?: string | null }> = ({ message }) => {
   return (
-    <article className="status-card" role="alert" aria-label="Link expired">
-      <div className="status-icon-circle icon-expired" aria-hidden="true">
+    <article className="w-full max-w-md mx-auto my-12 p-8 bg-white rounded-3xl border border-slate-200/90 shadow-soft-lg text-center" role="alert" aria-label="Link expired">
+      <div className="w-14 h-14 rounded-2xl bg-amber-50 border border-amber-200/80 text-amber-600 flex items-center justify-center mx-auto mb-4 shadow-soft-sm shrink-0" aria-hidden="true">
         <svg
           width="28"
           height="28"
+          className="w-7 h-7 shrink-0"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
@@ -73,8 +93,8 @@ export const ExpiredView: React.FC<{ message?: string | null }> = ({ message }) 
         </svg>
       </div>
 
-      <h1 className="status-heading">Share Unavailable</h1>
-      <p className="status-body">
+      <h1 className="text-2xl font-bold text-slate-900 tracking-tight">Share Unavailable</h1>
+      <p className="mt-2 text-sm text-slate-600">
         {message || 'This link has expired.'}
       </p>
     </article>
@@ -86,11 +106,12 @@ export const ExpiredView: React.FC<{ message?: string | null }> = ({ message }) 
  */
 export const RevokedView: React.FC<{ message?: string | null }> = ({ message }) => {
   return (
-    <article className="status-card" role="alert" aria-label="Link revoked">
-      <div className="status-icon-circle icon-revoked" aria-hidden="true">
+    <article className="w-full max-w-md mx-auto my-12 p-8 bg-white rounded-3xl border border-slate-200/90 shadow-soft-lg text-center" role="alert" aria-label="Link revoked">
+      <div className="w-14 h-14 rounded-2xl bg-rose-50 border border-rose-200/80 text-rose-600 flex items-center justify-center mx-auto mb-4 shadow-soft-sm shrink-0" aria-hidden="true">
         <svg
           width="28"
           height="28"
+          className="w-7 h-7 shrink-0"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
@@ -103,8 +124,8 @@ export const RevokedView: React.FC<{ message?: string | null }> = ({ message }) 
         </svg>
       </div>
 
-      <h1 className="status-heading">Share Unavailable</h1>
-      <p className="status-body">
+      <h1 className="text-2xl font-bold text-slate-900 tracking-tight">Share Unavailable</h1>
+      <p className="mt-2 text-sm text-slate-600">
         {message || 'This link has been revoked.'}
       </p>
     </article>
@@ -116,11 +137,12 @@ export const RevokedView: React.FC<{ message?: string | null }> = ({ message }) 
  */
 export const NotFoundView: React.FC<{ message?: string | null }> = ({ message }) => {
   return (
-    <article className="status-card" role="alert" aria-label="Link not found">
-      <div className="status-icon-circle icon-notfound" aria-hidden="true">
+    <article className="w-full max-w-md mx-auto my-12 p-8 bg-white rounded-3xl border border-slate-200/90 shadow-soft-lg text-center" role="alert" aria-label="Link not found">
+      <div className="w-14 h-14 rounded-2xl bg-slate-100 border border-slate-200 text-slate-600 flex items-center justify-center mx-auto mb-4 shadow-soft-sm shrink-0" aria-hidden="true">
         <svg
           width="28"
           height="28"
+          className="w-7 h-7 shrink-0"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
@@ -134,8 +156,8 @@ export const NotFoundView: React.FC<{ message?: string | null }> = ({ message })
         </svg>
       </div>
 
-      <h1 className="status-heading">Link Not Found</h1>
-      <p className="status-body">
+      <h1 className="text-2xl font-bold text-slate-900 tracking-tight">Link Not Found</h1>
+      <p className="mt-2 text-sm text-slate-600">
         {message || "This DevParcel link doesn't exist or is no longer available."}
       </p>
     </article>
@@ -150,11 +172,12 @@ export const ServerErrorView: React.FC<{
   onRetry: () => void;
 }> = ({ message, onRetry }) => {
   return (
-    <article className="status-card" role="alert" aria-label="Server error">
-      <div className="status-icon-circle icon-error" aria-hidden="true">
+    <article className="w-full max-w-md mx-auto my-12 p-8 bg-white rounded-3xl border border-slate-200/90 shadow-soft-lg text-center" role="alert" aria-label="Server error">
+      <div className="w-14 h-14 rounded-2xl bg-rose-50 border border-rose-200/80 text-rose-600 flex items-center justify-center mx-auto mb-4 shadow-soft-sm shrink-0" aria-hidden="true">
         <svg
           width="28"
           height="28"
+          className="w-7 h-7 shrink-0"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
@@ -172,14 +195,14 @@ export const ServerErrorView: React.FC<{
         </svg>
       </div>
 
-      <h1 className="status-heading">Something went wrong</h1>
-      <p className="status-body">
+      <h1 className="text-2xl font-bold text-slate-900 tracking-tight">Something went wrong</h1>
+      <p className="mt-2 text-sm text-slate-600">
         {message || "We couldn't load this project right now. Please check your connection."}
       </p>
 
       <button
         type="button"
-        className="secondary-action-btn"
+        className="mt-6 px-6 py-2.5 min-h-[44px] inline-flex items-center justify-center gap-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-semibold text-sm transition-all whitespace-nowrap"
         onClick={onRetry}
       >
         Try Again

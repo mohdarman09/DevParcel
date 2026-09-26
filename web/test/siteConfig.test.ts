@@ -8,10 +8,10 @@ describe('siteConfig', () => {
     assert.strictEqual(siteConfig.apiBaseUrl.endsWith('/'), false);
   });
 
-  it('correctly handles empty marketplace URL as null (Coming Soon)', () => {
+  it('correctly handles empty marketplace URL as null (defaults to direct GitHub / editor install)', () => {
     // When unset or empty, marketplaceUrl should normalize to null
     assert.strictEqual(typeof siteConfig.marketplaceUrl, 'object');
-    // If null, UI shows 'Coming soon to VS Code Marketplace'
+    // If null, UI defaults to GitHub repository / editor install link
     if (siteConfig.marketplaceUrl === null) {
       assert.strictEqual(siteConfig.marketplaceUrl, null);
     }

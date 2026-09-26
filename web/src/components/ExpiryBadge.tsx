@@ -23,6 +23,7 @@ export const ExpiryBadge: React.FC<ExpiryBadgeProps> = ({ expiresAt }) => {
       <svg
         width="14"
         height="14"
+        className="w-3.5 h-3.5 shrink-0"
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"

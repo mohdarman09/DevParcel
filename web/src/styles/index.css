@@ -2,6 +2,10 @@
 @import './components.css';
 @import './responsive.css';
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* CSS Reset & Modern Box Model */
 *,
 *::before,

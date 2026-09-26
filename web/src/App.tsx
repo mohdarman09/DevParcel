@@ -1,17 +1,21 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { ShareDownloadPage } from './pages/ShareDownloadPage';
-import { NotFoundPage } from './pages/NotFoundPage';
+import { LandingPage } from './pages/LandingPage';
+import { SharePage } from './pages/SharePage';
+import { InstallModalProvider } from './components/InstallEditorModal';
 
 export const App: React.FC = () => {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/share/:token" element={<ShareDownloadPage />} />
-        <Route path="/" element={<Navigate to="/share/invalid" replace />} />
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
-    </BrowserRouter>
+    <InstallModalProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/share/:token" element={<SharePage />} />
+          <Route path="/share" element={<Navigate to="/" replace />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </BrowserRouter>
+    </InstallModalProvider>
   );
 };
 

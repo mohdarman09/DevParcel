@@ -35,12 +35,14 @@ export interface DownloadUrlData {
 }
 
 export type PageStatus =
+  | 'idle'
   | 'loading'
   | 'ready'
   | 'password_required'
   | 'expired'
   | 'revoked'
   | 'not_found'
+  | 'invalid'
   | 'error';
 
 export type DownloadState = 'idle' | 'preparing' | 'started' | 'success' | 'error';

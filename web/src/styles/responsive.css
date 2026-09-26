@@ -148,7 +148,6 @@
 
   .app-main {
     padding: 8px 16px 36px;
-    gap: 36px;
   }
 
   /* Reorder Hero for Mobile Download Priority */
@@ -315,6 +314,124 @@
   }
 
   .promo-cta-box {
+    width: 100%;
+  }
+
+  .promo-availability-block {
+    align-items: center;
+    text-align: center;
+    width: 100%;
+  }
+
+  .promo-availability-heading {
+    align-items: center;
+    text-align: center;
+  }
+
+  .editor-chips-row {
+    justify-content: center;
+  }
+
+  /* Share Status Notice - Mobile */
+  .share-status-card {
+    padding: 14px 16px;
+    margin-bottom: 20px;
+    border-radius: var(--radius-lg);
+  }
+
+  .share-status-card-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .share-status-title {
+    font-size: 14px;
+  }
+
+  .share-status-desc {
+    font-size: 12.5px;
+  }
+
+  .share-status-retry-btn {
+    width: 100%;
+    justify-content: center;
+    margin-top: 4px;
+  }
+
+  /* Unavailable Fallback Layout - Mobile */
+  .unavailable-fallback-container {
+    gap: 20px;
+    padding: 0 4px;
+  }
+
+  .unavailable-status-banner {
+    padding: 20px 16px;
+    border-radius: var(--radius-lg);
+  }
+
+  .unavailable-heading {
+    font-size: 20px;
+  }
+
+  .unavailable-explanation {
+    font-size: 14px;
+  }
+
+  .unavailable-transition {
+    font-size: 12.5px;
+  }
+
+  .unavailable-hero-card {
+    padding: 28px 18px;
+    border-radius: var(--radius-xl);
+    gap: 24px;
+  }
+
+  .unavailable-hero-title {
+    font-size: 24px;
+    line-height: 1.2;
+  }
+
+  .unavailable-hero-desc {
+    font-size: 14px;
+  }
+
+  .unavailable-features-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .unavailable-feature-item {
+    padding: 12px 14px;
+  }
+
+  .unavailable-availability-panel {
+    padding: 20px 16px;
+    border-radius: var(--radius-lg);
+    gap: 16px;
+  }
+
+  .availability-panel-title {
+    font-size: 17px;
+  }
+
+  .availability-panel-desc {
+    font-size: 13px;
+  }
+
+  .availability-cards-row {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .unavailable-actions-row {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .primary-action-btn,
+  .unavailable-actions-row .secondary-action-btn {
     width: 100%;
   }
 

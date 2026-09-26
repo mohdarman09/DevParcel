@@ -71,6 +71,31 @@ describe('shareApi', () => {
       );
     });
 
+    it('maps 400 response with INVALID_TOKEN to not_found pageStatus', async () => {
+      globalThis.fetch = async () =>
+        ({
+          ok: false,
+          status: 400,
+          json: async () => ({
+            success: false,
+            error: {
+              code: 'INVALID_TOKEN',
+              message: 'The provided share token is invalid or malformed.',
+            },
+          }),
+        } as any);
+
+      await assert.rejects(
+        () => fetchShareMetadata('invalid'),
+        (err: any) => {
+          assert.ok(err instanceof ShareApiError);
+          assert.strictEqual(err.pageStatus, 'not_found');
+          assert.strictEqual(err.statusCode, 400);
+          return true;
+        }
+      );
+    });
+
     it('maps 410 response with SHARE_EXPIRED to expired pageStatus', async () => {
       globalThis.fetch = async () =>
         ({
